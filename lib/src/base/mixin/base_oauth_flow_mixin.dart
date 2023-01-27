@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:oauth_webauth/oauth_webauth.dart';
 
@@ -27,6 +27,7 @@ mixin BaseOAuthFlowMixin on BaseFlowMixin {
     final List<String>? scopes,
     final String? loginHint,
     final List<String>? promptValues,
+    final String? audience,
     required ValueChanged<oauth2.Credentials> onSuccessAuth,
     ValueChanged<dynamic>? onError,
     VoidCallback? onCancel,
@@ -70,6 +71,7 @@ mixin BaseOAuthFlowMixin on BaseFlowMixin {
             if (loginHint != null) 'login_hint': loginHint,
             if (promptValues?.isNotEmpty ?? false)
               'prompt': promptValues!.join(' '),
+            if (audience?.isNotEmpty ?? false) 'audience': audience ?? ''
           }));
   }
 

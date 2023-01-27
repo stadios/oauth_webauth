@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:oauth2/oauth2.dart';
 import 'package:http/http.dart' as http;
+import 'package:oauth2/oauth2.dart';
 import 'package:oauth_webauth/oauth_webauth.dart';
 
 class OAuthWebScreen extends StatelessWidget {
@@ -14,6 +14,7 @@ class OAuthWebScreen extends StatelessWidget {
     required String redirectUrl,
     final String? baseUrl,
     required String clientId,
+    String? audience,
     String? clientSecret,
     String? delimiter,
     bool? basicAuth,
@@ -61,6 +62,7 @@ class OAuthWebScreen extends StatelessWidget {
           onSuccessAuth: onSuccess!,
           onError: onError,
           onCancel: onCancel,
+          audience: audience,
         );
       oauthFlow.onNavigateTo(OauthWebAuth.instance.appBaseUrl);
       return null;
@@ -95,6 +97,7 @@ class OAuthWebScreen extends StatelessWidget {
                   refreshBtnVisible: refreshBtnVisible,
                   clearCacheBtnVisible: clearCacheBtnVisible,
                   closeBtnVisible: closeBtnVisible,
+                  audience: audience,
                 )));
   }
 
@@ -204,6 +207,7 @@ class OAuthWebScreen extends StatelessWidget {
   final bool? refreshBtnVisible;
   final bool? clearCacheBtnVisible;
   final bool? closeBtnVisible;
+  final String? audience;
 
   late final BuildContext context;
   final GlobalKey<OAuthWebViewState> globalKey;
@@ -237,6 +241,7 @@ class OAuthWebScreen extends StatelessWidget {
     this.refreshBtnVisible,
     this.clearCacheBtnVisible,
     this.closeBtnVisible,
+    this.audience,
   })  : globalKey = globalKey ?? GlobalKey<OAuthWebViewState>(),
         super(key: key);
 
@@ -280,6 +285,7 @@ class OAuthWebScreen extends StatelessWidget {
                 refreshBtnVisible: refreshBtnVisible,
                 clearCacheBtnVisible: clearCacheBtnVisible,
                 closeBtnVisible: closeBtnVisible,
+                audience: audience,
               ),
             ),
           ),

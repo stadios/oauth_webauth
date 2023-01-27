@@ -1,11 +1,14 @@
 import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:http/http.dart' as http;
+import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:oauth_webauth/oauth_webauth.dart';
 
 class OAuthWebView extends BaseWebView {
+  final String? audience;
+
   /// A URL provided by the authorization server that serves as the base for the
   /// URL that the resource owner will be redirected to to authorize this
   /// client.
@@ -94,6 +97,7 @@ class OAuthWebView extends BaseWebView {
     this.scopes,
     this.loginHint,
     this.promptValues,
+    this.audience,
     required this.onSuccessAuth,
     required ValueChanged<dynamic> onError,
     required VoidCallback onCancel,
@@ -156,6 +160,7 @@ class OAuthWebViewState extends BaseWebViewState<OAuthWebView>
       onSuccessAuth: widget.onSuccessAuth,
       onError: widget.onError,
       onCancel: widget.onCancel,
+      audience: widget.audience,
     );
   }
 

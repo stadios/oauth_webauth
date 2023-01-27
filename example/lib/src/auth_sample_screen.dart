@@ -30,7 +30,8 @@ class _AuthSampleScreenState extends State<AuthSampleScreen> {
   final List<String> scopes = const String.fromEnvironment('SCOPES',
           defaultValue: 'https://test-redirect-to.com')
       .split(' ');
-
+  static const audience = String.fromEnvironment('AUDIENCE',
+      defaultValue: 'https://test-redirect-to.com');
   String authResponse = 'Authorization data will be shown here';
   Locale? contentLocale;
   final locales = const [null, Locale('es'), Locale('en')];
@@ -115,6 +116,7 @@ class _AuthSampleScreenState extends State<AuthSampleScreen> {
       scopes: scopes,
       promptValues: const ['login'],
       loginHint: 'johndoe@mail.com',
+      audience: audience,
       onCertificateValidate: (certificate) {
         ///This is recommended
         /// Do certificate validations here
@@ -156,7 +158,8 @@ class _AuthSampleScreenState extends State<AuthSampleScreen> {
         redirectUrl: redirectUrl,
         scopes: scopes,
         promptValues: const ['login'],
-        loginHint: 'johndoe@mail.com',
+        // loginHint: 'freedomiza1991@mail.com',
+        audience: audience,
         onCertificateValidate: (certificate) {
           ///This is recommended
           /// Do certificate validations here
